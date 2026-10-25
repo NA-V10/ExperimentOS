@@ -1,0 +1,2622 @@
+{
+  "name": "RAG Retrieval Evaluation (synthetic)",
+  "version": "rag-eval-v1",
+  "seed": 42,
+  "description": "Deterministic synthetic QA benchmark over fictional entities. Each gold entity has two look-alike decoy entities with conflicting facts, so answering requires retrieving the correct passage. Questions are either 'direct' (share wording with the gold passage) or 'paraphrase' (share wording with a template that decoys may also use).",
+  "answer_vocabulary": {
+    "year": [
+      "1953",
+      "1954",
+      "1955",
+      "1957",
+      "1958",
+      "1960",
+      "1964",
+      "1965",
+      "1966",
+      "1979",
+      "1983",
+      "1984",
+      "1986",
+      "1987",
+      "1989",
+      "1990",
+      "1995",
+      "1999",
+      "2003",
+      "2007",
+      "2012",
+      "2014",
+      "2016",
+      "2018"
+    ],
+    "person": [
+      "Ada Navarro",
+      "Ada Quill",
+      "Anton Moreau",
+      "Bruno Rasmund",
+      "Clio Castell",
+      "Hana Galvez",
+      "Ines Moreau",
+      "Ines Rasmund",
+      "Kasimir Galvez",
+      "Kasimir Korvan",
+      "Kasimir Oyelaran",
+      "Leda Duvall",
+      "Leda Hollis",
+      "Matteo Farrow",
+      "Matteo Ulrich",
+      "Mira Orlov",
+      "Noor Abara",
+      "Noor Duvall",
+      "Ruben Quill",
+      "Ruben Varga",
+      "Sanne Korvan",
+      "Sanne Zelenka",
+      "Teodor Petrakis",
+      "Tomas Sorensen"
+    ],
+    "place": [
+      "Allerby",
+      "Ashgrove",
+      "Brackwater",
+      "Brimvale",
+      "Corrabeg",
+      "Durnholt",
+      "Ebbington",
+      "Frostmere",
+      "Glenmarsh",
+      "Haskett",
+      "Islay Ford",
+      "Kelmwick",
+      "Nethercombe",
+      "Ostrava Point",
+      "Ostwick",
+      "Pellorin",
+      "Pennaby",
+      "Quarnes",
+      "Rookmoor",
+      "Sablecross",
+      "Selby Rise",
+      "Toller Cove",
+      "Varnholm",
+      "Wyndle"
+    ],
+    "count": [
+      "191",
+      "285",
+      "293",
+      "332",
+      "342",
+      "368",
+      "391",
+      "394",
+      "450",
+      "481",
+      "506",
+      "591",
+      "664",
+      "688",
+      "741",
+      "768",
+      "773",
+      "781",
+      "804",
+      "817",
+      "819",
+      "822",
+      "836",
+      "864"
+    ],
+    "project": [
+      "Amber Relay",
+      "Basalt Choir",
+      "Blue Meridian",
+      "Cobalt Arc",
+      "Deep Lantern",
+      "Ember Tide",
+      "Granite Echo",
+      "Helix Harbor",
+      "Iron Bloom",
+      "Jade Compass",
+      "Kite Horizon",
+      "Lumen Drift",
+      "Mosaic Vale",
+      "North Quarry",
+      "Opal Current",
+      "Prism Hollow",
+      "Quiet Atlas",
+      "Raven Thread",
+      "Silver Furrow",
+      "Tidal Ledger",
+      "Umber Spire",
+      "Violet Gauge",
+      "Willow Circuit",
+      "Zenith Loom"
+    ]
+  },
+  "documents": [
+    {
+      "id": "d001",
+      "text": "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d002",
+      "text": "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d003",
+      "text": "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d004",
+      "text": "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation.",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d005",
+      "text": "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry.",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d006",
+      "text": "Velmara Research Station operates year-round despite long periods of darkness. Velmara Research Station first opened its doors to staff in 1955. The main hall of Velmara Research Station was renovated to improve insulation.",
+      "metadata": {
+        "entity": "Velmara Research Station",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d007",
+      "text": "Visiting scientists at Velmara Research Station study glaciers, sea ice and atmospheric chemistry. Supply flights to Velmara Research Station are scheduled around seasonal sea ice. Day-to-day management of Velmara Research Station is headed by Anton Moreau.",
+      "metadata": {
+        "entity": "Velmara Research Station",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d008",
+      "text": "Supply flights to Velmara Research Station are scheduled around seasonal sea ice. The main hall of Velmara Research Station was renovated to improve insulation. Velmara Research Station is located near the town of Kelmwick.",
+      "metadata": {
+        "entity": "Velmara Research Station",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d009",
+      "text": "Velmara Research Station operates year-round despite long periods of darkness. The main hall of Velmara Research Station was renovated to improve insulation. A workforce of 332 people keeps Velmara Research Station running.",
+      "metadata": {
+        "entity": "Velmara Research Station",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d010",
+      "text": "Supply flights to Velmara Research Station are scheduled around seasonal sea ice. Velmara Research Station operates year-round despite long periods of darkness. Most funding at Velmara Research Station goes to the Basalt Choir initiative.",
+      "metadata": {
+        "entity": "Velmara Research Station",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d011",
+      "text": "The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station was formally established in 1987. Velmora Field Station operates year-round despite long periods of darkness.",
+      "metadata": {
+        "entity": "Velmora Field Station",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d012",
+      "text": "Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station is currently led by director Ada Navarro.",
+      "metadata": {
+        "entity": "Velmora Field Station",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d013",
+      "text": "Supply flights to Velmora Field Station are scheduled around seasonal sea ice. The nearest settlement to Velmora Field Station is Rookmoor. Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry.",
+      "metadata": {
+        "entity": "Velmora Field Station",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d014",
+      "text": "A workforce of 804 people keeps Velmora Field Station running. The main hall of Velmora Field Station was renovated to improve insulation. Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry.",
+      "metadata": {
+        "entity": "Velmora Field Station",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d015",
+      "text": "The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station operates year-round despite long periods of darkness. Most funding at Velmora Field Station goes to the Blue Meridian initiative.",
+      "metadata": {
+        "entity": "Velmora Field Station",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d016",
+      "text": "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d017",
+      "text": "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d018",
+      "text": "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d019",
+      "text": "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff.",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d020",
+      "text": "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d021",
+      "text": "Kestrel Point Observatory hosts public viewing nights during clear winter evenings. Kestrel Point Observatory first opened its doors to staff in 2018. Researchers at Kestrel Point Observatory publish surveys of variable stars.",
+      "metadata": {
+        "entity": "Kestrel Point Observatory",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d022",
+      "text": "Researchers at Kestrel Point Observatory publish surveys of variable stars. Kestrel Point Observatory is currently led by director Bruno Rasmund. Light pollution near Kestrel Point Observatory is monitored by a regional council.",
+      "metadata": {
+        "entity": "Kestrel Point Observatory",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d023",
+      "text": "Kestrel Point Observatory is located near the town of Pennaby. The dome of Kestrel Point Observatory houses a large reflecting telescope. Kestrel Point Observatory hosts public viewing nights during clear winter evenings.",
+      "metadata": {
+        "entity": "Kestrel Point Observatory",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d024",
+      "text": "Kestrel Point Observatory employs 836 full-time staff. Kestrel Point Observatory hosts public viewing nights during clear winter evenings. Light pollution near Kestrel Point Observatory is monitored by a regional council.",
+      "metadata": {
+        "entity": "Kestrel Point Observatory",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d025",
+      "text": "Kestrel Point Observatory hosts public viewing nights during clear winter evenings. The flagship programme at Kestrel Point Observatory is the Zenith Loom initiative. The dome of Kestrel Point Observatory houses a large reflecting telescope.",
+      "metadata": {
+        "entity": "Kestrel Point Observatory",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d026",
+      "text": "Kestrel Bay Planetarium hosts public viewing nights during clear winter evenings. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. Kestrel Bay Planetarium was formally established in 1960.",
+      "metadata": {
+        "entity": "Kestrel Bay Planetarium",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d027",
+      "text": "The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. Day-to-day management of Kestrel Bay Planetarium is headed by Matteo Farrow.",
+      "metadata": {
+        "entity": "Kestrel Bay Planetarium",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d028",
+      "text": "Light pollution near Kestrel Bay Planetarium is monitored by a regional council. The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Kestrel Bay Planetarium is located near the town of Wyndle.",
+      "metadata": {
+        "entity": "Kestrel Bay Planetarium",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d029",
+      "text": "A workforce of 817 people keeps Kestrel Bay Planetarium running. The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council.",
+      "metadata": {
+        "entity": "Kestrel Bay Planetarium",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d030",
+      "text": "The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. The flagship programme at Kestrel Bay Planetarium is the Kite Horizon initiative.",
+      "metadata": {
+        "entity": "Kestrel Bay Planetarium",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d031",
+      "text": "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d032",
+      "text": "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d033",
+      "text": "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d034",
+      "text": "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities.",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d035",
+      "text": "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities.",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d036",
+      "text": "Laboratories at Orinth Genomics follow strict biosafety procedures. Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics was formally established in 1958.",
+      "metadata": {
+        "entity": "Orinth Genomics",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d037",
+      "text": "Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics licenses several of its sequencing tools to universities. Day-to-day management of Orinth Genomics is headed by Hana Galvez.",
+      "metadata": {
+        "entity": "Orinth Genomics",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d038",
+      "text": "Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics is located near the town of Haskett.",
+      "metadata": {
+        "entity": "Orinth Genomics",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d039",
+      "text": "Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics employs 191 full-time staff.",
+      "metadata": {
+        "entity": "Orinth Genomics",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d040",
+      "text": "Most funding at Orinth Genomics goes to the Iron Bloom initiative. Laboratories at Orinth Genomics follow strict biosafety procedures. The campus of Orinth Genomics includes greenhouse facilities.",
+      "metadata": {
+        "entity": "Orinth Genomics",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d041",
+      "text": "Orinda Biolabs licenses several of its sequencing tools to universities. The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs was formally established in 1995.",
+      "metadata": {
+        "entity": "Orinda Biolabs",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d042",
+      "text": "Orinda Biolabs develops enzyme assays for industrial partners. Day-to-day management of Orinda Biolabs is headed by Leda Hollis. The campus of Orinda Biolabs includes greenhouse facilities.",
+      "metadata": {
+        "entity": "Orinda Biolabs",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d043",
+      "text": "The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs licenses several of its sequencing tools to universities. The nearest settlement to Orinda Biolabs is Frostmere.",
+      "metadata": {
+        "entity": "Orinda Biolabs",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d044",
+      "text": "Orinda Biolabs employs 741 full-time staff. The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs licenses several of its sequencing tools to universities.",
+      "metadata": {
+        "entity": "Orinda Biolabs",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d045",
+      "text": "The flagship programme at Orinda Biolabs is the Cobalt Arc initiative. Orinda Biolabs licenses several of its sequencing tools to universities. Orinda Biolabs develops enzyme assays for industrial partners.",
+      "metadata": {
+        "entity": "Orinda Biolabs",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d046",
+      "text": "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d047",
+      "text": "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d048",
+      "text": "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d049",
+      "text": "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running.",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d050",
+      "text": "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure.",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d051",
+      "text": "The Thalassa Surface Probe carries spectrometers and a magnetometer. Thalassa Surface Probe was formally established in 1986. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas.",
+      "metadata": {
+        "entity": "Thalassa Surface Probe",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d052",
+      "text": "Engineers designed the Thalassa Surface Probe to survive extreme pressure. Thalassa Surface Probe is currently led by director Kasimir Korvan. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas.",
+      "metadata": {
+        "entity": "Thalassa Surface Probe",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d053",
+      "text": "Engineers designed the Thalassa Surface Probe to survive extreme pressure. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas. The nearest settlement to Thalassa Surface Probe is Brimvale.",
+      "metadata": {
+        "entity": "Thalassa Surface Probe",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d054",
+      "text": "The Thalassa Surface Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Surface Probe publish quarterly status reports. Thalassa Surface Probe employs 293 full-time staff.",
+      "metadata": {
+        "entity": "Thalassa Surface Probe",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d055",
+      "text": "Engineers designed the Thalassa Surface Probe to survive extreme pressure. The Thalassa Surface Probe carries spectrometers and a magnetometer. Most funding at Thalassa Surface Probe goes to the Umber Spire initiative.",
+      "metadata": {
+        "entity": "Thalassa Surface Probe",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d056",
+      "text": "Telemetry from the Thalara Deep Probe is relayed through deep space antennas. Thalara Deep Probe was formally established in 1957. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+      "metadata": {
+        "entity": "Thalara Deep Probe",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d057",
+      "text": "Day-to-day management of Thalara Deep Probe is headed by Leda Duvall. Engineers designed the Thalara Deep Probe to survive extreme pressure. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+      "metadata": {
+        "entity": "Thalara Deep Probe",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d058",
+      "text": "Mission planners for the Thalara Deep Probe publish quarterly status reports. The nearest settlement to Thalara Deep Probe is Pellorin. The Thalara Deep Probe carries spectrometers and a magnetometer.",
+      "metadata": {
+        "entity": "Thalara Deep Probe",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d059",
+      "text": "A workforce of 664 people keeps Thalara Deep Probe running. The Thalara Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+      "metadata": {
+        "entity": "Thalara Deep Probe",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d060",
+      "text": "Engineers designed the Thalara Deep Probe to survive extreme pressure. Most funding at Thalara Deep Probe goes to the Deep Lantern initiative. Telemetry from the Thalara Deep Probe is relayed through deep space antennas.",
+      "metadata": {
+        "entity": "Thalara Deep Probe",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d061",
+      "text": "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d062",
+      "text": "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d063",
+      "text": "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d064",
+      "text": "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles.",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d065",
+      "text": "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week.",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d066",
+      "text": "Marrowgate University Library first opened its doors to staff in 1979. Marrowgate University Library lends rare manuscripts to accredited researchers. Marrowgate University Library runs a digitisation programme for historic newspapers.",
+      "metadata": {
+        "entity": "Marrowgate University Library",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d067",
+      "text": "Volunteers at Marrowgate University Library organise weekly reading circles. Day-to-day management of Marrowgate University Library is headed by Kasimir Galvez. The reading rooms of Marrowgate University Library are open seven days a week.",
+      "metadata": {
+        "entity": "Marrowgate University Library",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d068",
+      "text": "Marrowgate University Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate University Library are open seven days a week. The nearest settlement to Marrowgate University Library is Selby Rise.",
+      "metadata": {
+        "entity": "Marrowgate University Library",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d069",
+      "text": "A workforce of 368 people keeps Marrowgate University Library running. Marrowgate University Library lends rare manuscripts to accredited researchers. Volunteers at Marrowgate University Library organise weekly reading circles.",
+      "metadata": {
+        "entity": "Marrowgate University Library",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d070",
+      "text": "The reading rooms of Marrowgate University Library are open seven days a week. Marrowgate University Library lends rare manuscripts to accredited researchers. The flagship programme at Marrowgate University Library is the Willow Circuit initiative.",
+      "metadata": {
+        "entity": "Marrowgate University Library",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d071",
+      "text": "Marrowfield Public Library runs a digitisation programme for historic newspapers. Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library was formally established in 1954.",
+      "metadata": {
+        "entity": "Marrowfield Public Library",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d072",
+      "text": "Day-to-day management of Marrowfield Public Library is headed by Mira Orlov. The reading rooms of Marrowfield Public Library are open seven days a week. Marrowfield Public Library runs a digitisation programme for historic newspapers.",
+      "metadata": {
+        "entity": "Marrowfield Public Library",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d073",
+      "text": "Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library lends rare manuscripts to accredited researchers. The nearest settlement to Marrowfield Public Library is Durnholt.",
+      "metadata": {
+        "entity": "Marrowfield Public Library",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d074",
+      "text": "Marrowfield Public Library lends rare manuscripts to accredited researchers. Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library employs 285 full-time staff.",
+      "metadata": {
+        "entity": "Marrowfield Public Library",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d075",
+      "text": "Marrowfield Public Library lends rare manuscripts to accredited researchers. The flagship programme at Marrowfield Public Library is the Quiet Atlas initiative. The reading rooms of Marrowfield Public Library are open seven days a week.",
+      "metadata": {
+        "entity": "Marrowfield Public Library",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d076",
+      "text": "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d077",
+      "text": "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d078",
+      "text": "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d079",
+      "text": "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power.",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d080",
+      "text": "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative.",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d081",
+      "text": "Cindral Lake Dam was formally established in 2007. The Cindral Lake Dam regulates seasonal flooding downstream. Turbines inside the Cindral Lake Dam generate hydroelectric power.",
+      "metadata": {
+        "entity": "Cindral Lake Dam",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d082",
+      "text": "A walking trail runs along the crest of the Cindral Lake Dam. Turbines inside the Cindral Lake Dam generate hydroelectric power. Day-to-day management of Cindral Lake Dam is headed by Noor Abara.",
+      "metadata": {
+        "entity": "Cindral Lake Dam",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d083",
+      "text": "A walking trail runs along the crest of the Cindral Lake Dam. The nearest settlement to Cindral Lake Dam is Ebbington. Inspections of the Cindral Lake Dam are carried out every spring.",
+      "metadata": {
+        "entity": "Cindral Lake Dam",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d084",
+      "text": "A workforce of 506 people keeps Cindral Lake Dam running. The Cindral Lake Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindral Lake Dam.",
+      "metadata": {
+        "entity": "Cindral Lake Dam",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d085",
+      "text": "A walking trail runs along the crest of the Cindral Lake Dam. Most funding at Cindral Lake Dam goes to the Tidal Ledger initiative. Inspections of the Cindral Lake Dam are carried out every spring.",
+      "metadata": {
+        "entity": "Cindral Lake Dam",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d086",
+      "text": "Cindrel River Dam first opened its doors to staff in 1965. A walking trail runs along the crest of the Cindrel River Dam. Turbines inside the Cindrel River Dam generate hydroelectric power.",
+      "metadata": {
+        "entity": "Cindrel River Dam",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d087",
+      "text": "Cindrel River Dam is currently led by director Ruben Varga. A walking trail runs along the crest of the Cindrel River Dam. Turbines inside the Cindrel River Dam generate hydroelectric power.",
+      "metadata": {
+        "entity": "Cindrel River Dam",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d088",
+      "text": "A walking trail runs along the crest of the Cindrel River Dam. Cindrel River Dam is located near the town of Varnholm. The Cindrel River Dam regulates seasonal flooding downstream.",
+      "metadata": {
+        "entity": "Cindrel River Dam",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d089",
+      "text": "A workforce of 394 people keeps Cindrel River Dam running. The Cindrel River Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindrel River Dam.",
+      "metadata": {
+        "entity": "Cindrel River Dam",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d090",
+      "text": "The Cindrel River Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindrel River Dam. The flagship programme at Cindrel River Dam is the Raven Thread initiative.",
+      "metadata": {
+        "entity": "Cindrel River Dam",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d091",
+      "text": "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d092",
+      "text": "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d093",
+      "text": "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d094",
+      "text": "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges.",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d095",
+      "text": "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain.",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d096",
+      "text": "The test arena at Halvren Aerospace Institute simulates rough outdoor terrain. Halvren Aerospace Institute was formally established in 1984. Halvren Aerospace Institute builds autonomous inspection robots.",
+      "metadata": {
+        "entity": "Halvren Aerospace Institute",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d097",
+      "text": "Halvren Aerospace Institute is currently led by director Kasimir Oyelaran. Halvren Aerospace Institute partners with manufacturers on warehouse automation. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain.",
+      "metadata": {
+        "entity": "Halvren Aerospace Institute",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d098",
+      "text": "Students at Halvren Aerospace Institute compete in international robotics challenges. The nearest settlement to Halvren Aerospace Institute is Toller Cove. Halvren Aerospace Institute builds autonomous inspection robots.",
+      "metadata": {
+        "entity": "Halvren Aerospace Institute",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d099",
+      "text": "Halvren Aerospace Institute partners with manufacturers on warehouse automation. Halvren Aerospace Institute employs 822 full-time staff. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain.",
+      "metadata": {
+        "entity": "Halvren Aerospace Institute",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d100",
+      "text": "The flagship programme at Halvren Aerospace Institute is the Violet Gauge initiative. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain. Halvren Aerospace Institute partners with manufacturers on warehouse automation.",
+      "metadata": {
+        "entity": "Halvren Aerospace Institute",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d101",
+      "text": "Halvrin Robotics Institute was formally established in 1990. Halvrin Robotics Institute builds autonomous inspection robots. Halvrin Robotics Institute partners with manufacturers on warehouse automation.",
+      "metadata": {
+        "entity": "Halvrin Robotics Institute",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d102",
+      "text": "Halvrin Robotics Institute is currently led by director Matteo Ulrich. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+      "metadata": {
+        "entity": "Halvrin Robotics Institute",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d103",
+      "text": "Halvrin Robotics Institute is located near the town of Nethercombe. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Halvrin Robotics Institute builds autonomous inspection robots.",
+      "metadata": {
+        "entity": "Halvrin Robotics Institute",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d104",
+      "text": "A workforce of 688 people keeps Halvrin Robotics Institute running. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+      "metadata": {
+        "entity": "Halvrin Robotics Institute",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d105",
+      "text": "Most funding at Halvrin Robotics Institute goes to the Lumen Drift initiative. Halvrin Robotics Institute builds autonomous inspection robots. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+      "metadata": {
+        "entity": "Halvrin Robotics Institute",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d106",
+      "text": "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "year",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d107",
+      "text": "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "leader",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d108",
+      "text": "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "location",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d109",
+      "text": "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "staff",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d110",
+      "text": "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid.",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "project",
+        "is_decoy": false
+      }
+    },
+    {
+      "id": "d111",
+      "text": "Solvane Solar Farm first opened its doors to staff in 2016. Maintenance crews visit Solvane Solar Farm every month. Environmental surveys around Solvane Solar Farm track local bird populations.",
+      "metadata": {
+        "entity": "Solvane Solar Farm",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d112",
+      "text": "Day-to-day management of Solvane Solar Farm is headed by Tomas Sorensen. Output from Solvane Solar Farm peaks during the windy autumn months. Maintenance crews visit Solvane Solar Farm every month.",
+      "metadata": {
+        "entity": "Solvane Solar Farm",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d113",
+      "text": "The nearest settlement to Solvane Solar Farm is Quarnes. Maintenance crews visit Solvane Solar Farm every month. Environmental surveys around Solvane Solar Farm track local bird populations.",
+      "metadata": {
+        "entity": "Solvane Solar Farm",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d114",
+      "text": "Output from Solvane Solar Farm peaks during the windy autumn months. Solvane Solar Farm feeds electricity into the regional grid. Solvane Solar Farm employs 819 full-time staff.",
+      "metadata": {
+        "entity": "Solvane Solar Farm",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d115",
+      "text": "Solvane Solar Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Solar Farm every month. The flagship programme at Solvane Solar Farm is the Silver Furrow initiative.",
+      "metadata": {
+        "entity": "Solvane Solar Farm",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d116",
+      "text": "Solvany Wind Farm feeds electricity into the regional grid. Output from Solvany Wind Farm peaks during the windy autumn months. Solvany Wind Farm first opened its doors to staff in 1964.",
+      "metadata": {
+        "entity": "Solvany Wind Farm",
+        "attribute": "year",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d117",
+      "text": "Solvany Wind Farm feeds electricity into the regional grid. Solvany Wind Farm is currently led by director Clio Castell. Output from Solvany Wind Farm peaks during the windy autumn months.",
+      "metadata": {
+        "entity": "Solvany Wind Farm",
+        "attribute": "leader",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d118",
+      "text": "Solvany Wind Farm feeds electricity into the regional grid. Output from Solvany Wind Farm peaks during the windy autumn months. Solvany Wind Farm is located near the town of Sablecross.",
+      "metadata": {
+        "entity": "Solvany Wind Farm",
+        "attribute": "location",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d119",
+      "text": "Solvany Wind Farm feeds electricity into the regional grid. Environmental surveys around Solvany Wind Farm track local bird populations. Solvany Wind Farm employs 450 full-time staff.",
+      "metadata": {
+        "entity": "Solvany Wind Farm",
+        "attribute": "staff",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d120",
+      "text": "Maintenance crews visit Solvany Wind Farm every month. Most funding at Solvany Wind Farm goes to the Opal Current initiative. Environmental surveys around Solvany Wind Farm track local bird populations.",
+      "metadata": {
+        "entity": "Solvany Wind Farm",
+        "attribute": "project",
+        "is_decoy": true
+      }
+    },
+    {
+      "id": "d121",
+      "text": "Research stations, observatories and laboratories are often established decades before they reach full capacity.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d122",
+      "text": "Many institutions publish the number of full-time staff they employ in annual reports.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d123",
+      "text": "A director usually leads the day-to-day management of a scientific facility.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d124",
+      "text": "Flagship programmes often receive most of the funding at a research institute.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d125",
+      "text": "The nearest settlement to a remote facility is frequently a small harbour town.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d126",
+      "text": "Historians debate when facilities formally opened their doors versus when construction finished.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d127",
+      "text": "Workforce figures for infrastructure projects include contractors and permanent staff.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d128",
+      "text": "Funding initiatives at public institutions are reviewed every few years.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d129",
+      "text": "Many observatories are located near towns with low light pollution.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d130",
+      "text": "Libraries and archives employ conservators, archivists and full-time reference staff.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d131",
+      "text": "Wind farms and dams are typically located far from the nearest town.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d132",
+      "text": "Deep space probes are managed by mission directors rather than facility directors.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d133",
+      "text": "Robotics institutes often run several flagship programmes at once.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d134",
+      "text": "Biotechnology companies frequently change directors after acquisitions.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d135",
+      "text": "The year a facility was established is not always the year it first opened.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d136",
+      "text": "Polar research stations rely on a small workforce during the winter months.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d137",
+      "text": "Hydroelectric dams employ engineers to keep the turbines running.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d138",
+      "text": "Public libraries often name their flagship initiatives after local landmarks.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d139",
+      "text": "Many research facilities are formally established by government charter.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    },
+    {
+      "id": "d140",
+      "text": "Annual reports describe who leads each facility and how many staff it employs.",
+      "metadata": {
+        "entity": null,
+        "attribute": null,
+        "is_decoy": false,
+        "background": true
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "q001",
+      "question": "When did Velmora Research Station first open its doors?",
+      "context": [
+        "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+        "Velmara Research Station operates year-round despite long periods of darkness. Velmara Research Station first opened its doors to staff in 1955. The main hall of Velmara Research Station was renovated to improve insulation.",
+        "The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station was formally established in 1987. Velmora Field Station operates year-round despite long periods of darkness.",
+        "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry."
+      ],
+      "expected_answer": "1966",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d001",
+        "context_ids": [
+          "d001",
+          "d006",
+          "d011",
+          "d002",
+          "d003",
+          "d004",
+          "d005"
+        ]
+      }
+    },
+    {
+      "id": "q002",
+      "question": "Who heads the day-to-day management of Velmora Research Station?",
+      "context": [
+        "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+        "Visiting scientists at Velmara Research Station study glaciers, sea ice and atmospheric chemistry. Supply flights to Velmara Research Station are scheduled around seasonal sea ice. Day-to-day management of Velmara Research Station is headed by Anton Moreau.",
+        "Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station is currently led by director Ada Navarro.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry."
+      ],
+      "expected_answer": "Teodor Petrakis",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d002",
+        "context_ids": [
+          "d002",
+          "d007",
+          "d012",
+          "d001",
+          "d003",
+          "d004",
+          "d005"
+        ]
+      }
+    },
+    {
+      "id": "q003",
+      "question": "Near which town is Velmora Research Station located?",
+      "context": [
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+        "Supply flights to Velmara Research Station are scheduled around seasonal sea ice. The main hall of Velmara Research Station was renovated to improve insulation. Velmara Research Station is located near the town of Kelmwick.",
+        "Supply flights to Velmora Field Station are scheduled around seasonal sea ice. The nearest settlement to Velmora Field Station is Rookmoor. Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+        "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry."
+      ],
+      "expected_answer": "Ashgrove",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "direct",
+        "gold_doc_id": "d003",
+        "context_ids": [
+          "d003",
+          "d008",
+          "d013",
+          "d001",
+          "d002",
+          "d004",
+          "d005"
+        ]
+      }
+    },
+    {
+      "id": "q004",
+      "question": "How many full-time staff does Velmora Research Station employ?",
+      "context": [
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation.",
+        "Velmara Research Station operates year-round despite long periods of darkness. The main hall of Velmara Research Station was renovated to improve insulation. A workforce of 332 people keeps Velmara Research Station running.",
+        "A workforce of 804 people keeps Velmora Field Station running. The main hall of Velmora Field Station was renovated to improve insulation. Visiting scientists at Velmora Field Station study glaciers, sea ice and atmospheric chemistry.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+        "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry."
+      ],
+      "expected_answer": "481",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "direct",
+        "gold_doc_id": "d004",
+        "context_ids": [
+          "d004",
+          "d009",
+          "d014",
+          "d001",
+          "d002",
+          "d003",
+          "d005"
+        ]
+      }
+    },
+    {
+      "id": "q005",
+      "question": "Which initiative receives most of the funding at Velmora Research Station?",
+      "context": [
+        "The main hall of Velmora Research Station was renovated to improve insulation. The flagship programme at Velmora Research Station is the Amber Relay initiative. Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry.",
+        "Supply flights to Velmara Research Station are scheduled around seasonal sea ice. Velmara Research Station operates year-round despite long periods of darkness. Most funding at Velmara Research Station goes to the Basalt Choir initiative.",
+        "The main hall of Velmora Field Station was renovated to improve insulation. Velmora Field Station operates year-round despite long periods of darkness. Most funding at Velmora Field Station goes to the Blue Meridian initiative.",
+        "The main hall of Velmora Research Station was renovated to improve insulation. Supply flights to Velmora Research Station are scheduled around seasonal sea ice. Velmora Research Station first opened its doors to staff in 1966.",
+        "Velmora Research Station operates year-round despite long periods of darkness. The main hall of Velmora Research Station was renovated to improve insulation. Day-to-day management of Velmora Research Station is headed by Teodor Petrakis.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. The main hall of Velmora Research Station was renovated to improve insulation. Velmora Research Station is located near the town of Ashgrove.",
+        "Visiting scientists at Velmora Research Station study glaciers, sea ice and atmospheric chemistry. A workforce of 481 people keeps Velmora Research Station running. The main hall of Velmora Research Station was renovated to improve insulation."
+      ],
+      "expected_answer": "Amber Relay",
+      "metadata": {
+        "entity": "Velmora Research Station",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d005",
+        "context_ids": [
+          "d005",
+          "d010",
+          "d015",
+          "d001",
+          "d002",
+          "d003",
+          "d004"
+        ]
+      }
+    },
+    {
+      "id": "q006",
+      "question": "In what year was Kestrel Bay Observatory established?",
+      "context": [
+        "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+        "Kestrel Point Observatory hosts public viewing nights during clear winter evenings. Kestrel Point Observatory first opened its doors to staff in 2018. Researchers at Kestrel Point Observatory publish surveys of variable stars.",
+        "Kestrel Bay Planetarium hosts public viewing nights during clear winter evenings. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. Kestrel Bay Planetarium was formally established in 1960.",
+        "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+        "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff.",
+        "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council."
+      ],
+      "expected_answer": "1983",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "direct",
+        "gold_doc_id": "d016",
+        "context_ids": [
+          "d016",
+          "d021",
+          "d026",
+          "d017",
+          "d018",
+          "d019",
+          "d020"
+        ]
+      }
+    },
+    {
+      "id": "q007",
+      "question": "Who is the director that leads Kestrel Bay Observatory?",
+      "context": [
+        "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Researchers at Kestrel Point Observatory publish surveys of variable stars. Kestrel Point Observatory is currently led by director Bruno Rasmund. Light pollution near Kestrel Point Observatory is monitored by a regional council.",
+        "The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. Day-to-day management of Kestrel Bay Planetarium is headed by Matteo Farrow.",
+        "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+        "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+        "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff.",
+        "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council."
+      ],
+      "expected_answer": "Ines Rasmund",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "direct",
+        "gold_doc_id": "d017",
+        "context_ids": [
+          "d017",
+          "d022",
+          "d027",
+          "d016",
+          "d018",
+          "d019",
+          "d020"
+        ]
+      }
+    },
+    {
+      "id": "q008",
+      "question": "Near which town is Kestrel Bay Observatory located?",
+      "context": [
+        "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+        "Kestrel Point Observatory is located near the town of Pennaby. The dome of Kestrel Point Observatory houses a large reflecting telescope. Kestrel Point Observatory hosts public viewing nights during clear winter evenings.",
+        "Light pollution near Kestrel Bay Planetarium is monitored by a regional council. The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Kestrel Bay Planetarium is located near the town of Wyndle.",
+        "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+        "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff.",
+        "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council."
+      ],
+      "expected_answer": "Ostrava Point",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "direct",
+        "gold_doc_id": "d018",
+        "context_ids": [
+          "d018",
+          "d023",
+          "d028",
+          "d016",
+          "d017",
+          "d019",
+          "d020"
+        ]
+      }
+    },
+    {
+      "id": "q009",
+      "question": "How large is the workforce that keeps Kestrel Bay Observatory running?",
+      "context": [
+        "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff.",
+        "Kestrel Point Observatory employs 836 full-time staff. Kestrel Point Observatory hosts public viewing nights during clear winter evenings. Light pollution near Kestrel Point Observatory is monitored by a regional council.",
+        "A workforce of 817 people keeps Kestrel Bay Planetarium running. The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council.",
+        "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+        "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+        "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council."
+      ],
+      "expected_answer": "391",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d019",
+        "context_ids": [
+          "d019",
+          "d024",
+          "d029",
+          "d016",
+          "d017",
+          "d018",
+          "d020"
+        ]
+      }
+    },
+    {
+      "id": "q010",
+      "question": "What is the flagship programme at Kestrel Bay Observatory?",
+      "context": [
+        "The flagship programme at Kestrel Bay Observatory is the Helix Harbor initiative. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Kestrel Point Observatory hosts public viewing nights during clear winter evenings. The flagship programme at Kestrel Point Observatory is the Zenith Loom initiative. The dome of Kestrel Point Observatory houses a large reflecting telescope.",
+        "The dome of Kestrel Bay Planetarium houses a large reflecting telescope. Light pollution near Kestrel Bay Planetarium is monitored by a regional council. The flagship programme at Kestrel Bay Planetarium is the Kite Horizon initiative.",
+        "Kestrel Bay Observatory hosts public viewing nights during clear winter evenings. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory was formally established in 1983.",
+        "Kestrel Bay Observatory is currently led by director Ines Rasmund. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Light pollution near Kestrel Bay Observatory is monitored by a regional council.",
+        "Kestrel Bay Observatory is located near the town of Ostrava Point. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Researchers at Kestrel Bay Observatory publish surveys of variable stars.",
+        "Light pollution near Kestrel Bay Observatory is monitored by a regional council. The dome of Kestrel Bay Observatory houses a large reflecting telescope. Kestrel Bay Observatory employs 391 full-time staff."
+      ],
+      "expected_answer": "Helix Harbor",
+      "metadata": {
+        "entity": "Kestrel Bay Observatory",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "direct",
+        "gold_doc_id": "d020",
+        "context_ids": [
+          "d020",
+          "d025",
+          "d030",
+          "d016",
+          "d017",
+          "d018",
+          "d019"
+        ]
+      }
+    },
+    {
+      "id": "q011",
+      "question": "When did Orinth Biolabs first open its doors?",
+      "context": [
+        "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+        "Laboratories at Orinth Genomics follow strict biosafety procedures. Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics was formally established in 1958.",
+        "Orinda Biolabs licenses several of its sequencing tools to universities. The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs was formally established in 1995.",
+        "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+        "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities."
+      ],
+      "expected_answer": "1999",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d031",
+        "context_ids": [
+          "d031",
+          "d036",
+          "d041",
+          "d032",
+          "d033",
+          "d034",
+          "d035"
+        ]
+      }
+    },
+    {
+      "id": "q012",
+      "question": "Who heads the day-to-day management of Orinth Biolabs?",
+      "context": [
+        "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+        "Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics licenses several of its sequencing tools to universities. Day-to-day management of Orinth Genomics is headed by Hana Galvez.",
+        "Orinda Biolabs develops enzyme assays for industrial partners. Day-to-day management of Orinda Biolabs is headed by Leda Hollis. The campus of Orinda Biolabs includes greenhouse facilities.",
+        "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+        "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities."
+      ],
+      "expected_answer": "Sanne Zelenka",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d032",
+        "context_ids": [
+          "d032",
+          "d037",
+          "d042",
+          "d031",
+          "d033",
+          "d034",
+          "d035"
+        ]
+      }
+    },
+    {
+      "id": "q013",
+      "question": "What is the nearest settlement to Orinth Biolabs?",
+      "context": [
+        "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics is located near the town of Haskett.",
+        "The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs licenses several of its sequencing tools to universities. The nearest settlement to Orinda Biolabs is Frostmere.",
+        "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+        "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+        "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities."
+      ],
+      "expected_answer": "Corrabeg",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d033",
+        "context_ids": [
+          "d033",
+          "d038",
+          "d043",
+          "d031",
+          "d032",
+          "d034",
+          "d035"
+        ]
+      }
+    },
+    {
+      "id": "q014",
+      "question": "How many full-time staff does Orinth Biolabs employ?",
+      "context": [
+        "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Genomics develops enzyme assays for industrial partners. Orinth Genomics licenses several of its sequencing tools to universities. Orinth Genomics employs 191 full-time staff.",
+        "Orinda Biolabs employs 741 full-time staff. The campus of Orinda Biolabs includes greenhouse facilities. Orinda Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+        "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+        "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities."
+      ],
+      "expected_answer": "781",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "direct",
+        "gold_doc_id": "d034",
+        "context_ids": [
+          "d034",
+          "d039",
+          "d044",
+          "d031",
+          "d032",
+          "d033",
+          "d035"
+        ]
+      }
+    },
+    {
+      "id": "q015",
+      "question": "Which initiative receives most of the funding at Orinth Biolabs?",
+      "context": [
+        "Most funding at Orinth Biolabs goes to the Mosaic Vale initiative. Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Most funding at Orinth Genomics goes to the Iron Bloom initiative. Laboratories at Orinth Genomics follow strict biosafety procedures. The campus of Orinth Genomics includes greenhouse facilities.",
+        "The flagship programme at Orinda Biolabs is the Cobalt Arc initiative. Orinda Biolabs licenses several of its sequencing tools to universities. Orinda Biolabs develops enzyme assays for industrial partners.",
+        "Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs was formally established in 1999.",
+        "Orinth Biolabs licenses several of its sequencing tools to universities. Orinth Biolabs develops enzyme assays for industrial partners. Orinth Biolabs is currently led by director Sanne Zelenka.",
+        "Laboratories at Orinth Biolabs follow strict biosafety procedures. Orinth Biolabs is located near the town of Corrabeg. Orinth Biolabs licenses several of its sequencing tools to universities.",
+        "Orinth Biolabs employs 781 full-time staff. The campus of Orinth Biolabs includes greenhouse facilities. Orinth Biolabs licenses several of its sequencing tools to universities."
+      ],
+      "expected_answer": "Mosaic Vale",
+      "metadata": {
+        "entity": "Orinth Biolabs",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d035",
+        "context_ids": [
+          "d035",
+          "d040",
+          "d045",
+          "d031",
+          "d032",
+          "d033",
+          "d034"
+        ]
+      }
+    },
+    {
+      "id": "q016",
+      "question": "When did Thalassa Deep Probe first open its doors?",
+      "context": [
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+        "The Thalassa Surface Probe carries spectrometers and a magnetometer. Thalassa Surface Probe was formally established in 1986. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas.",
+        "Telemetry from the Thalara Deep Probe is relayed through deep space antennas. Thalara Deep Probe was formally established in 1957. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+        "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure."
+      ],
+      "expected_answer": "2012",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d046",
+        "context_ids": [
+          "d046",
+          "d051",
+          "d056",
+          "d047",
+          "d048",
+          "d049",
+          "d050"
+        ]
+      }
+    },
+    {
+      "id": "q017",
+      "question": "Who is the director that leads Thalassa Deep Probe?",
+      "context": [
+        "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+        "Engineers designed the Thalassa Surface Probe to survive extreme pressure. Thalassa Surface Probe is currently led by director Kasimir Korvan. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas.",
+        "Day-to-day management of Thalara Deep Probe is headed by Leda Duvall. Engineers designed the Thalara Deep Probe to survive extreme pressure. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure."
+      ],
+      "expected_answer": "Ada Quill",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "direct",
+        "gold_doc_id": "d047",
+        "context_ids": [
+          "d047",
+          "d052",
+          "d057",
+          "d046",
+          "d048",
+          "d049",
+          "d050"
+        ]
+      }
+    },
+    {
+      "id": "q018",
+      "question": "What is the nearest settlement to Thalassa Deep Probe?",
+      "context": [
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+        "Engineers designed the Thalassa Surface Probe to survive extreme pressure. Telemetry from the Thalassa Surface Probe is relayed through deep space antennas. The nearest settlement to Thalassa Surface Probe is Brimvale.",
+        "Mission planners for the Thalara Deep Probe publish quarterly status reports. The nearest settlement to Thalara Deep Probe is Pellorin. The Thalara Deep Probe carries spectrometers and a magnetometer.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+        "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure."
+      ],
+      "expected_answer": "Brackwater",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d048",
+        "context_ids": [
+          "d048",
+          "d053",
+          "d058",
+          "d046",
+          "d047",
+          "d049",
+          "d050"
+        ]
+      }
+    },
+    {
+      "id": "q019",
+      "question": "How many full-time staff does Thalassa Deep Probe employ?",
+      "context": [
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running.",
+        "The Thalassa Surface Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Surface Probe publish quarterly status reports. Thalassa Surface Probe employs 293 full-time staff.",
+        "A workforce of 664 people keeps Thalara Deep Probe running. The Thalara Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalara Deep Probe publish quarterly status reports.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+        "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure."
+      ],
+      "expected_answer": "768",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "direct",
+        "gold_doc_id": "d049",
+        "context_ids": [
+          "d049",
+          "d054",
+          "d059",
+          "d046",
+          "d047",
+          "d048",
+          "d050"
+        ]
+      }
+    },
+    {
+      "id": "q020",
+      "question": "Which initiative receives most of the funding at Thalassa Deep Probe?",
+      "context": [
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. The flagship programme at Thalassa Deep Probe is the Granite Echo initiative. Engineers designed the Thalassa Deep Probe to survive extreme pressure.",
+        "Engineers designed the Thalassa Surface Probe to survive extreme pressure. The Thalassa Surface Probe carries spectrometers and a magnetometer. Most funding at Thalassa Surface Probe goes to the Umber Spire initiative.",
+        "Engineers designed the Thalara Deep Probe to survive extreme pressure. Most funding at Thalara Deep Probe goes to the Deep Lantern initiative. Telemetry from the Thalara Deep Probe is relayed through deep space antennas.",
+        "Mission planners for the Thalassa Deep Probe publish quarterly status reports. Engineers designed the Thalassa Deep Probe to survive extreme pressure. Thalassa Deep Probe first opened its doors to staff in 2012.",
+        "Engineers designed the Thalassa Deep Probe to survive extreme pressure. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. Thalassa Deep Probe is currently led by director Ada Quill.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Mission planners for the Thalassa Deep Probe publish quarterly status reports. Thalassa Deep Probe is located near the town of Brackwater.",
+        "The Thalassa Deep Probe carries spectrometers and a magnetometer. Telemetry from the Thalassa Deep Probe is relayed through deep space antennas. A workforce of 768 people keeps Thalassa Deep Probe running."
+      ],
+      "expected_answer": "Granite Echo",
+      "metadata": {
+        "entity": "Thalassa Deep Probe",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d050",
+        "context_ids": [
+          "d050",
+          "d055",
+          "d060",
+          "d046",
+          "d047",
+          "d048",
+          "d049"
+        ]
+      }
+    },
+    {
+      "id": "q021",
+      "question": "In what year was Marrowgate Public Library established?",
+      "context": [
+        "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+        "Marrowgate University Library first opened its doors to staff in 1979. Marrowgate University Library lends rare manuscripts to accredited researchers. Marrowgate University Library runs a digitisation programme for historic newspapers.",
+        "Marrowfield Public Library runs a digitisation programme for historic newspapers. Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library was formally established in 1954.",
+        "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+        "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles.",
+        "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week."
+      ],
+      "expected_answer": "1989",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "direct",
+        "gold_doc_id": "d061",
+        "context_ids": [
+          "d061",
+          "d066",
+          "d071",
+          "d062",
+          "d063",
+          "d064",
+          "d065"
+        ]
+      }
+    },
+    {
+      "id": "q022",
+      "question": "Who is the director that leads Marrowgate Public Library?",
+      "context": [
+        "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+        "Volunteers at Marrowgate University Library organise weekly reading circles. Day-to-day management of Marrowgate University Library is headed by Kasimir Galvez. The reading rooms of Marrowgate University Library are open seven days a week.",
+        "Day-to-day management of Marrowfield Public Library is headed by Mira Orlov. The reading rooms of Marrowfield Public Library are open seven days a week. Marrowfield Public Library runs a digitisation programme for historic newspapers.",
+        "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+        "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles.",
+        "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week."
+      ],
+      "expected_answer": "Ines Moreau",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "direct",
+        "gold_doc_id": "d062",
+        "context_ids": [
+          "d062",
+          "d067",
+          "d072",
+          "d061",
+          "d063",
+          "d064",
+          "d065"
+        ]
+      }
+    },
+    {
+      "id": "q023",
+      "question": "Near which town is Marrowgate Public Library located?",
+      "context": [
+        "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "Marrowgate University Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate University Library are open seven days a week. The nearest settlement to Marrowgate University Library is Selby Rise.",
+        "Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library lends rare manuscripts to accredited researchers. The nearest settlement to Marrowfield Public Library is Durnholt.",
+        "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+        "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+        "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles.",
+        "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week."
+      ],
+      "expected_answer": "Ostwick",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "direct",
+        "gold_doc_id": "d063",
+        "context_ids": [
+          "d063",
+          "d068",
+          "d073",
+          "d061",
+          "d062",
+          "d064",
+          "d065"
+        ]
+      }
+    },
+    {
+      "id": "q024",
+      "question": "How many full-time staff does Marrowgate Public Library employ?",
+      "context": [
+        "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles.",
+        "A workforce of 368 people keeps Marrowgate University Library running. Marrowgate University Library lends rare manuscripts to accredited researchers. Volunteers at Marrowgate University Library organise weekly reading circles.",
+        "Marrowfield Public Library lends rare manuscripts to accredited researchers. Volunteers at Marrowfield Public Library organise weekly reading circles. Marrowfield Public Library employs 285 full-time staff.",
+        "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+        "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+        "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week."
+      ],
+      "expected_answer": "864",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "direct",
+        "gold_doc_id": "d064",
+        "context_ids": [
+          "d064",
+          "d069",
+          "d074",
+          "d061",
+          "d062",
+          "d063",
+          "d065"
+        ]
+      }
+    },
+    {
+      "id": "q025",
+      "question": "What is the flagship programme at Marrowgate Public Library?",
+      "context": [
+        "Marrowgate Public Library runs a digitisation programme for historic newspapers. The flagship programme at Marrowgate Public Library is the Prism Hollow initiative. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "The reading rooms of Marrowgate University Library are open seven days a week. Marrowgate University Library lends rare manuscripts to accredited researchers. The flagship programme at Marrowgate University Library is the Willow Circuit initiative.",
+        "Marrowfield Public Library lends rare manuscripts to accredited researchers. The flagship programme at Marrowfield Public Library is the Quiet Atlas initiative. The reading rooms of Marrowfield Public Library are open seven days a week.",
+        "The reading rooms of Marrowgate Public Library are open seven days a week. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library was formally established in 1989.",
+        "Day-to-day management of Marrowgate Public Library is headed by Ines Moreau. Marrowgate Public Library runs a digitisation programme for historic newspapers. Marrowgate Public Library lends rare manuscripts to accredited researchers.",
+        "The nearest settlement to Marrowgate Public Library is Ostwick. Marrowgate Public Library runs a digitisation programme for historic newspapers. The reading rooms of Marrowgate Public Library are open seven days a week.",
+        "Marrowgate Public Library employs 864 full-time staff. The reading rooms of Marrowgate Public Library are open seven days a week. Volunteers at Marrowgate Public Library organise weekly reading circles."
+      ],
+      "expected_answer": "Prism Hollow",
+      "metadata": {
+        "entity": "Marrowgate Public Library",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "direct",
+        "gold_doc_id": "d065",
+        "context_ids": [
+          "d065",
+          "d070",
+          "d075",
+          "d061",
+          "d062",
+          "d063",
+          "d064"
+        ]
+      }
+    },
+    {
+      "id": "q026",
+      "question": "When did Cindral River Dam first open its doors?",
+      "context": [
+        "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+        "Cindral Lake Dam was formally established in 2007. The Cindral Lake Dam regulates seasonal flooding downstream. Turbines inside the Cindral Lake Dam generate hydroelectric power.",
+        "Cindrel River Dam first opened its doors to staff in 1965. A walking trail runs along the crest of the Cindrel River Dam. Turbines inside the Cindrel River Dam generate hydroelectric power.",
+        "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+        "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative."
+      ],
+      "expected_answer": "1953",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d076",
+        "context_ids": [
+          "d076",
+          "d081",
+          "d086",
+          "d077",
+          "d078",
+          "d079",
+          "d080"
+        ]
+      }
+    },
+    {
+      "id": "q027",
+      "question": "Who heads the day-to-day management of Cindral River Dam?",
+      "context": [
+        "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+        "A walking trail runs along the crest of the Cindral Lake Dam. Turbines inside the Cindral Lake Dam generate hydroelectric power. Day-to-day management of Cindral Lake Dam is headed by Noor Abara.",
+        "Cindrel River Dam is currently led by director Ruben Varga. A walking trail runs along the crest of the Cindrel River Dam. Turbines inside the Cindrel River Dam generate hydroelectric power.",
+        "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+        "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative."
+      ],
+      "expected_answer": "Ruben Quill",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d077",
+        "context_ids": [
+          "d077",
+          "d082",
+          "d087",
+          "d076",
+          "d078",
+          "d079",
+          "d080"
+        ]
+      }
+    },
+    {
+      "id": "q028",
+      "question": "What is the nearest settlement to Cindral River Dam?",
+      "context": [
+        "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "A walking trail runs along the crest of the Cindral Lake Dam. The nearest settlement to Cindral Lake Dam is Ebbington. Inspections of the Cindral Lake Dam are carried out every spring.",
+        "A walking trail runs along the crest of the Cindrel River Dam. Cindrel River Dam is located near the town of Varnholm. The Cindrel River Dam regulates seasonal flooding downstream.",
+        "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+        "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+        "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative."
+      ],
+      "expected_answer": "Glenmarsh",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d078",
+        "context_ids": [
+          "d078",
+          "d083",
+          "d088",
+          "d076",
+          "d077",
+          "d079",
+          "d080"
+        ]
+      }
+    },
+    {
+      "id": "q029",
+      "question": "How many full-time staff does Cindral River Dam employ?",
+      "context": [
+        "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "A workforce of 506 people keeps Cindral Lake Dam running. The Cindral Lake Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindral Lake Dam.",
+        "A workforce of 394 people keeps Cindrel River Dam running. The Cindrel River Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindrel River Dam.",
+        "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+        "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+        "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative."
+      ],
+      "expected_answer": "591",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "direct",
+        "gold_doc_id": "d079",
+        "context_ids": [
+          "d079",
+          "d084",
+          "d089",
+          "d076",
+          "d077",
+          "d078",
+          "d080"
+        ]
+      }
+    },
+    {
+      "id": "q030",
+      "question": "Which initiative receives most of the funding at Cindral River Dam?",
+      "context": [
+        "The Cindral River Dam regulates seasonal flooding downstream. Turbines inside the Cindral River Dam generate hydroelectric power. The flagship programme at Cindral River Dam is the North Quarry initiative.",
+        "A walking trail runs along the crest of the Cindral Lake Dam. Most funding at Cindral Lake Dam goes to the Tidal Ledger initiative. Inspections of the Cindral Lake Dam are carried out every spring.",
+        "The Cindrel River Dam regulates seasonal flooding downstream. A walking trail runs along the crest of the Cindrel River Dam. The flagship programme at Cindrel River Dam is the Raven Thread initiative.",
+        "Inspections of the Cindral River Dam are carried out every spring. Cindral River Dam first opened its doors to staff in 1953. A walking trail runs along the crest of the Cindral River Dam.",
+        "Turbines inside the Cindral River Dam generate hydroelectric power. A walking trail runs along the crest of the Cindral River Dam. Day-to-day management of Cindral River Dam is headed by Ruben Quill.",
+        "A walking trail runs along the crest of the Cindral River Dam. The nearest settlement to Cindral River Dam is Glenmarsh. Turbines inside the Cindral River Dam generate hydroelectric power.",
+        "A workforce of 591 people keeps Cindral River Dam running. A walking trail runs along the crest of the Cindral River Dam. Turbines inside the Cindral River Dam generate hydroelectric power."
+      ],
+      "expected_answer": "North Quarry",
+      "metadata": {
+        "entity": "Cindral River Dam",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d080",
+        "context_ids": [
+          "d080",
+          "d085",
+          "d090",
+          "d076",
+          "d077",
+          "d078",
+          "d079"
+        ]
+      }
+    },
+    {
+      "id": "q031",
+      "question": "When did Halvren Robotics Institute first open its doors?",
+      "context": [
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+        "The test arena at Halvren Aerospace Institute simulates rough outdoor terrain. Halvren Aerospace Institute was formally established in 1984. Halvren Aerospace Institute builds autonomous inspection robots.",
+        "Halvrin Robotics Institute was formally established in 1990. Halvrin Robotics Institute builds autonomous inspection robots. Halvrin Robotics Institute partners with manufacturers on warehouse automation.",
+        "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+        "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges.",
+        "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain."
+      ],
+      "expected_answer": "2014",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d091",
+        "context_ids": [
+          "d091",
+          "d096",
+          "d101",
+          "d092",
+          "d093",
+          "d094",
+          "d095"
+        ]
+      }
+    },
+    {
+      "id": "q032",
+      "question": "Who is the director that leads Halvren Robotics Institute?",
+      "context": [
+        "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+        "Halvren Aerospace Institute is currently led by director Kasimir Oyelaran. Halvren Aerospace Institute partners with manufacturers on warehouse automation. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain.",
+        "Halvrin Robotics Institute is currently led by director Matteo Ulrich. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+        "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges.",
+        "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain."
+      ],
+      "expected_answer": "Noor Duvall",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "direct",
+        "gold_doc_id": "d092",
+        "context_ids": [
+          "d092",
+          "d097",
+          "d102",
+          "d091",
+          "d093",
+          "d094",
+          "d095"
+        ]
+      }
+    },
+    {
+      "id": "q033",
+      "question": "Near which town is Halvren Robotics Institute located?",
+      "context": [
+        "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+        "Students at Halvren Aerospace Institute compete in international robotics challenges. The nearest settlement to Halvren Aerospace Institute is Toller Cove. Halvren Aerospace Institute builds autonomous inspection robots.",
+        "Halvrin Robotics Institute is located near the town of Nethercombe. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Halvrin Robotics Institute builds autonomous inspection robots.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+        "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges.",
+        "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain."
+      ],
+      "expected_answer": "Islay Ford",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "direct",
+        "gold_doc_id": "d093",
+        "context_ids": [
+          "d093",
+          "d098",
+          "d103",
+          "d091",
+          "d092",
+          "d094",
+          "d095"
+        ]
+      }
+    },
+    {
+      "id": "q034",
+      "question": "How large is the workforce that keeps Halvren Robotics Institute running?",
+      "context": [
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges.",
+        "Halvren Aerospace Institute partners with manufacturers on warehouse automation. Halvren Aerospace Institute employs 822 full-time staff. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain.",
+        "A workforce of 688 people keeps Halvrin Robotics Institute running. The test arena at Halvrin Robotics Institute simulates rough outdoor terrain. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+        "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+        "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+        "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain."
+      ],
+      "expected_answer": "773",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d094",
+        "context_ids": [
+          "d094",
+          "d099",
+          "d104",
+          "d091",
+          "d092",
+          "d093",
+          "d095"
+        ]
+      }
+    },
+    {
+      "id": "q035",
+      "question": "Which initiative receives most of the funding at Halvren Robotics Institute?",
+      "context": [
+        "The flagship programme at Halvren Robotics Institute is the Ember Tide initiative. Halvren Robotics Institute partners with manufacturers on warehouse automation. The test arena at Halvren Robotics Institute simulates rough outdoor terrain.",
+        "The flagship programme at Halvren Aerospace Institute is the Violet Gauge initiative. The test arena at Halvren Aerospace Institute simulates rough outdoor terrain. Halvren Aerospace Institute partners with manufacturers on warehouse automation.",
+        "Most funding at Halvrin Robotics Institute goes to the Lumen Drift initiative. Halvrin Robotics Institute builds autonomous inspection robots. Students at Halvrin Robotics Institute compete in international robotics challenges.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute first opened its doors to staff in 2014. Halvren Robotics Institute partners with manufacturers on warehouse automation.",
+        "Halvren Robotics Institute partners with manufacturers on warehouse automation. Halvren Robotics Institute is currently led by director Noor Duvall. Halvren Robotics Institute builds autonomous inspection robots.",
+        "Halvren Robotics Institute builds autonomous inspection robots. The test arena at Halvren Robotics Institute simulates rough outdoor terrain. Halvren Robotics Institute is located near the town of Islay Ford.",
+        "Halvren Robotics Institute builds autonomous inspection robots. Halvren Robotics Institute employs 773 full-time staff. Students at Halvren Robotics Institute compete in international robotics challenges."
+      ],
+      "expected_answer": "Ember Tide",
+      "metadata": {
+        "entity": "Halvren Robotics Institute",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d095",
+        "context_ids": [
+          "d095",
+          "d100",
+          "d105",
+          "d091",
+          "d092",
+          "d093",
+          "d094"
+        ]
+      }
+    },
+    {
+      "id": "q036",
+      "question": "In what year was Solvane Wind Farm established?",
+      "context": [
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+        "Solvane Solar Farm first opened its doors to staff in 2016. Maintenance crews visit Solvane Solar Farm every month. Environmental surveys around Solvane Solar Farm track local bird populations.",
+        "Solvany Wind Farm feeds electricity into the regional grid. Output from Solvany Wind Farm peaks during the windy autumn months. Solvany Wind Farm first opened its doors to staff in 1964.",
+        "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+        "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid."
+      ],
+      "expected_answer": "2003",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "year",
+        "answer_type": "year",
+        "question_style": "direct",
+        "gold_doc_id": "d106",
+        "context_ids": [
+          "d106",
+          "d111",
+          "d116",
+          "d107",
+          "d108",
+          "d109",
+          "d110"
+        ]
+      }
+    },
+    {
+      "id": "q037",
+      "question": "Who heads the day-to-day management of Solvane Wind Farm?",
+      "context": [
+        "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Day-to-day management of Solvane Solar Farm is headed by Tomas Sorensen. Output from Solvane Solar Farm peaks during the windy autumn months. Maintenance crews visit Solvane Solar Farm every month.",
+        "Solvany Wind Farm feeds electricity into the regional grid. Solvany Wind Farm is currently led by director Clio Castell. Output from Solvany Wind Farm peaks during the windy autumn months.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+        "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+        "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid."
+      ],
+      "expected_answer": "Sanne Korvan",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "leader",
+        "answer_type": "person",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d107",
+        "context_ids": [
+          "d107",
+          "d112",
+          "d117",
+          "d106",
+          "d108",
+          "d109",
+          "d110"
+        ]
+      }
+    },
+    {
+      "id": "q038",
+      "question": "Near which town is Solvane Wind Farm located?",
+      "context": [
+        "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+        "The nearest settlement to Solvane Solar Farm is Quarnes. Maintenance crews visit Solvane Solar Farm every month. Environmental surveys around Solvane Solar Farm track local bird populations.",
+        "Solvany Wind Farm feeds electricity into the regional grid. Output from Solvany Wind Farm peaks during the windy autumn months. Solvany Wind Farm is located near the town of Sablecross.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+        "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid."
+      ],
+      "expected_answer": "Allerby",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "location",
+        "answer_type": "place",
+        "question_style": "direct",
+        "gold_doc_id": "d108",
+        "context_ids": [
+          "d108",
+          "d113",
+          "d118",
+          "d106",
+          "d107",
+          "d109",
+          "d110"
+        ]
+      }
+    },
+    {
+      "id": "q039",
+      "question": "How large is the workforce that keeps Solvane Wind Farm running?",
+      "context": [
+        "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Output from Solvane Solar Farm peaks during the windy autumn months. Solvane Solar Farm feeds electricity into the regional grid. Solvane Solar Farm employs 819 full-time staff.",
+        "Solvany Wind Farm feeds electricity into the regional grid. Environmental surveys around Solvany Wind Farm track local bird populations. Solvany Wind Farm employs 450 full-time staff.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+        "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid."
+      ],
+      "expected_answer": "342",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "staff",
+        "answer_type": "count",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d109",
+        "context_ids": [
+          "d109",
+          "d114",
+          "d119",
+          "d106",
+          "d107",
+          "d108",
+          "d110"
+        ]
+      }
+    },
+    {
+      "id": "q040",
+      "question": "Which initiative receives most of the funding at Solvane Wind Farm?",
+      "context": [
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Most funding at Solvane Wind Farm goes to the Jade Compass initiative. Solvane Wind Farm feeds electricity into the regional grid.",
+        "Solvane Solar Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Solar Farm every month. The flagship programme at Solvane Solar Farm is the Silver Furrow initiative.",
+        "Maintenance crews visit Solvany Wind Farm every month. Most funding at Solvany Wind Farm goes to the Opal Current initiative. Environmental surveys around Solvany Wind Farm track local bird populations.",
+        "Environmental surveys around Solvane Wind Farm track local bird populations. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm first opened its doors to staff in 2003.",
+        "Day-to-day management of Solvane Wind Farm is headed by Sanne Korvan. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month.",
+        "Solvane Wind Farm feeds electricity into the regional grid. Maintenance crews visit Solvane Wind Farm every month. Solvane Wind Farm is located near the town of Allerby.",
+        "A workforce of 342 people keeps Solvane Wind Farm running. Output from Solvane Wind Farm peaks during the windy autumn months. Maintenance crews visit Solvane Wind Farm every month."
+      ],
+      "expected_answer": "Jade Compass",
+      "metadata": {
+        "entity": "Solvane Wind Farm",
+        "attribute": "project",
+        "answer_type": "project",
+        "question_style": "paraphrase",
+        "gold_doc_id": "d110",
+        "context_ids": [
+          "d110",
+          "d115",
+          "d120",
+          "d106",
+          "d107",
+          "d108",
+          "d109"
+        ]
+      }
+    }
+  ]
+}

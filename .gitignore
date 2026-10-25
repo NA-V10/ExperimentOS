@@ -1,0 +1,50 @@
+# ── Secrets ──────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Local runtime data (never commit) ────────────────────────────────────
+# Nemotron response cache + daily token-usage counter
+.llm_cache/
+# sandbox working directories
+backend/.work/
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.log
+
+# ── Python ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# ── Node / Next.js ───────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+coverage/
+.vercel/
+*.tsbuildinfo
+frontend/next-env.d.ts
+npm-debug.log*
+
+# ── Editors / OS ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.claude/settings.local.json
+
+# deploy staging
+dist/

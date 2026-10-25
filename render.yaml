@@ -1,0 +1,54 @@
+# Render Blueprint — deploys ExperimentOS on Render's free tier.
+# Dashboard → New → Blueprint → pick this repo. Render prompts for NEBIUS_API_KEY (sync: false).
+#
+# Public URLs are https://<service name>.onrender.com. If Render appends a suffix because a name
+# is taken, update NEXT_PUBLIC_API_URL (web) and CORS_ORIGINS (api) and redeploy — see DEPLOY.md.
+
+services:
+  # ── Backend: FastAPI + sandboxed experiments ────────────────────────────────────────────────
+  - type: web
+    name: experimentos-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./docker/backend.Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NEBIUS_API_KEY            # Token Factory key — entered in the dashboard, never in git
+        sync: false
+      - key: NEBIUS_MODEL
+        value: nvidia/nemotron-3-super-120b-a12b
+      - key: NEBIUS_FAST_MODEL
+        value: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      - key: CORS_ORIGINS
+        value: https://experimentos-web.onrender.com
+      - key: CORS_ORIGIN_REGEX         # also accepts a suffixed name, e.g. experimentos-web-x1y2
+        value: https://experimentos-web(-[a-z0-9]+)?\.onrender\.com
+      # Public URL → protect the Token Factory trial
+      - key: LLM_DAILY_TOKEN_BUDGET
+        value: "100000"
+      - key: MAX_CONCURRENT_EXPERIMENTS
+        value: "1"
+      - key: EXPERIMENT_RATE_LIMIT_PER_MINUTE
+        value: "4"
+      # Free instance: 512 MB RAM, 0.1 CPU
+      - key: EXECUTION_MEMORY_MB
+        value: "384"
+      - key: EXECUTION_TIMEOUT_SECONDS
+        value: "420"
+
+  # ── Frontend: Next.js ────────────────────────────────────────────────────────────────────────
+  - type: web
+    name: experimentos-web
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm start          # `next start` listens on $PORT
+    autoDeploy: true
+    envVars:
+      - key: NEXT_PUBLIC_API_URL       # baked in at build time
+        value: https://experimentos-api.onrender.com
+      - key: NODE_VERSION
+        value: "22"

@@ -1,0 +1,18 @@
+# Keep images small and secret-free
+.env
+.env.*
+!.env.example
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/node_modules
+**/.next
+**/*.db
+**/*.db-*
+**/*.log
+**/.llm_cache
+backend/.work
+backend/tests
+.git
+dist
