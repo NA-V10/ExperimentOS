@@ -23,6 +23,7 @@ Built for the **Nebius × NVIDIA Global AI Hackathon** — *Best Apps and Agents
 | **API** | <https://experimentos-api-ijcq.onrender.com/health> |
 | **NVIDIA model** | Nemotron 3 Super 120B (reasoning) + Nemotron 3 Nano 30B (fast tasks) |
 | **Nebius service** | Token Factory — every reasoning step at runtime |
+| **Tavily** | Live web search for existing evidence before every new experiment |
 | **License** | MIT |
 
 ---
@@ -179,15 +180,17 @@ with the specific failure fed back, then falls back to a safe deterministic path
 
 ## Tavily Integration
 
-Optional research-discovery layer (`backend/app/research/tavily.py`), called at runtime when `TAVILY_API_KEY` is set:
+Research-discovery layer (`backend/app/research/tavily.py`), **enabled in the hosted demo** and called at runtime for
+every new research question when `TAVILY_API_KEY` is set:
 
 ```text
 Research question → Tavily search (runtime) → Nemotron summarises: known findings, assumptions,
                     research gap, what is testable locally → hypothesis & experiment design target the gap
 ```
 
-Sources are stored per experiment (`research_sources` table) and shown in the UI. If Tavily is missing or fails,
-the loop continues unchanged.
+Sources are stored per experiment (`research_sources` table) and shown in the UI ("Existing evidence · Tavily").
+Results for an identical query are cached, which saves Tavily credits and keeps the downstream Nemotron prompts
+identical. If Tavily is missing or fails, the loop continues unchanged.
 
 ---
 
@@ -430,7 +433,8 @@ No test needs a Nebius API key (Nemotron is mocked via `tests/fakes.py`; Token F
 - **Nebius:** Token Factory — runtime reasoning for every agent step (live). AI Cloud Serverless Jobs — optional
   execution backend, implemented but not used in the hosted demo.
 - **NVIDIA:** Nemotron 3 Super 120B (reasoning) and Nemotron 3 Nano 30B (fast tasks) for all language steps
-- **Tavily:** optional research discovery, implemented; not enabled in the hosted demo
+- **Tavily:** live runtime search (`POST https://api.tavily.com/search`) before each new experiment; Nemotron
+  summarises the sources into known findings and a research gap that the hypothesis targets
 - **License:** MIT
 
 Compliance checklist:
@@ -441,6 +445,7 @@ Compliance checklist:
 [x] Experiment actually executes; results are measured, not hard-coded
 [x] Public GitHub repository with MIT license
 [x] README with setup instructions; Nebius, NVIDIA and Tavily usage documented
+[x] Tavily runtime search call live in the hosted demo
 [x] Generated code is sandboxed · error states tested · no API keys committed (.env is git-ignored)
 [ ] Nebius AI Cloud job execution verified live (optional path, not used in the demo)
 [ ] 3-minute public demo video
