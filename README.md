@@ -17,6 +17,14 @@ hypothesis, execution, evidence and the next hypothesis** — and every claim it
 
 Built for the **Nebius × NVIDIA Global AI Hackathon** — *Best Apps and Agents* track.
 
+| | |
+|---|---|
+| **Live demo** | <https://experimentos-web.onrender.com> — click **Run Featured Experiment** (free hosting: the first visit after 15 idle minutes takes ~1 min to wake up) |
+| **API** | <https://experimentos-api-ijcq.onrender.com/health> |
+| **NVIDIA model** | Nemotron 3 Super 120B (reasoning) + Nemotron 3 Nano 30B (fast tasks) |
+| **Nebius service** | Token Factory — every reasoning step at runtime |
+| **License** | MIT |
+
 ---
 
 ## What it does
@@ -102,8 +110,8 @@ Demo flow (~2–3 minutes):
 
 1. **Question** — click **Run Featured Experiment**.
 2. **Agent** — watch the live timeline: hypothesis → design → validation (9 checks) → code → job.
-3. **Nebius** — the *Nebius × NVIDIA* panel shows `Nebius Token Factory → NVIDIA Nemotron → plan` (model, calls,
-   tokens) and `Nebius AI Cloud → Serverless Job → 160 evaluations`.
+3. **Nebius** — the *Nebius × NVIDIA* panel shows `Nebius Token Factory → NVIDIA Nemotron → plan` with the exact
+   models, number of calls and tokens used, and where the 160 evaluations ran (the local sandbox in the hosted demo).
 4. **Results** — real chart of accuracy (95% CI) and retrieval recall per configuration; evidence table with paired tests.
 5. **Analysis** — the hypothesis verdict, findings with clickable run-level evidence, "every number verified".
 6. **Next experiment** — e.g. *k=20 + reranking vs best plain top-k* → **RUN NEXT EXPERIMENT**.
@@ -117,12 +125,35 @@ Nebius is a runtime dependency, not a README mention.
 | Component | Where in code | What it does | Why |
 |---|---|---|---|
 | **Nebius Token Factory** | `backend/app/llm/nebius_client.py` | OpenAI-compatible `POST {NEBIUS_BASE_URL}/chat/completions` for every reasoning step. Each call is logged as an `llm_call` event (model, latency, tokens) and shown in the UI. | Hosted, OpenAI-compatible access to NVIDIA Nemotron with no GPU management. |
-| **Nebius AI Cloud — Serverless AI Jobs** | `backend/app/execution/nebius_jobs.py`, `docker/runner.Dockerfile` | With `EXECUTION_MODE=nebius`: `nebius ai job create --image <runner> --inject-file experiment.py:/opt/experimentos/job/experiment.py --platform cpu-d3 --preset 4vcpu-16gb --async`, then streams `nebius ai logs <job>` (live progress events) and polls `nebius ai job get-by-name` until terminal. Results return via a delimited JSON block in the logs. | Generated code runs in an ephemeral, credential-free container instead of on the API host — the production isolation boundary. |
+| **Nebius AI Cloud — Serverless AI Jobs** *(optional; implemented but **not used in the hosted demo** and not yet verified against a live job — the demo runs on a Token Factory trial and executes experiments in the app's own sandbox)* | `backend/app/execution/nebius_jobs.py`, `docker/runner.Dockerfile` | With `EXECUTION_MODE=nebius`: `nebius ai job create --image <runner> --inject-file experiment.py:/opt/experimentos/job/experiment.py --platform cpu-d3 --preset 4vcpu-16gb --async`, then streams `nebius ai logs <job>` (live progress events) and polls `nebius ai job get-by-name` until terminal. Results return via a delimited JSON block in the logs. | Generated code runs in an ephemeral, credential-free container instead of on the API host — the production isolation boundary. |
 
 ```text
-Nebius Token Factory  →  Nemotron  →  hypothesis / plan / code / analysis / next experiment
-Nebius AI Cloud       →  Serverless AI Job  →  experiment execution (N evaluations)
+Nebius Token Factory  →  Nemotron  →  hypothesis / plan / code / analysis / next experiment   (live demo)
+Nebius AI Cloud       →  Serverless AI Job  →  experiment execution                           (optional path)
 ```
+
+### Where Token Factory accelerated the workflow
+
+Measured on a live run of the featured experiment (question → hypothesis → plan → code → execution → analysis →
+next experiment): **the whole loop finished in 42 s with 8 Token Factory calls (~23k tokens)**.
+
+| Step | Model | Latency | Tokens |
+|---|---|---|---|
+| understand_question | Nemotron 3 Nano 30B | 1.8 s | 1,017 |
+| create_hypothesis | Nemotron 3 Super 120B | 4.1 s | 1,533 |
+| design_experiment | Nemotron 3 Super 120B | 8.2 s | 3,090 |
+| generate_experiment_code | Nemotron 3 Super 120B | 3.6 s | 1,651 |
+| analyze_results | Nemotron 3 Super 120B | 6.3 s | 5,287 |
+| create_next_experiment (+1 retry) | Nemotron 3 Super 120B | 5.9 s + 9.3 s | 10,413 |
+
+- **OpenAI-compatible API** — integration is a single `httpx` client; no SDK, no GPU provisioning.
+- **Two model tiers on one endpoint** — the cheap Nano model handles parsing, the Super model handles reasoning,
+  switched by configuration only.
+- **First-try structured output** — Nemotron's JSON passed the schema, falsifiability, plan-validation and
+  number-grounding checks on the first attempt for every step except one (since fixed: the model wrote a
+  descriptive phrase where an exact parameter name was required).
+- Since that run, prompts were trimmed ~68% for the analysis steps and identical requests are cached, cutting
+  token use further.
 
 If `EXECUTION_MODE=nebius` but the CLI or image is missing, the agent says so in the timeline and (with
 `NEBIUS_JOB_FALLBACK_LOCAL=true`) falls back to the local sandbox rather than failing silently.
@@ -395,22 +426,24 @@ No test needs a Nebius API key (Nemotron is mocked via `tests/fakes.py`; Token F
 ## Hackathon Submission
 
 - **Track:** Best Apps and Agents
-- **Nebius:** Token Factory (runtime reasoning) + AI Cloud Serverless AI Jobs (experiment execution)
-- **NVIDIA:** Nemotron open models for all reasoning steps
-- **Bonus:** Tavily runtime research discovery
+- **Live demo:** <https://experimentos-web.onrender.com> · **Code:** <https://github.com/NA-V10/ExperimentOS>
+- **Nebius:** Token Factory — runtime reasoning for every agent step (live). AI Cloud Serverless Jobs — optional
+  execution backend, implemented but not used in the hosted demo.
+- **NVIDIA:** Nemotron 3 Super 120B (reasoning) and Nemotron 3 Nano 30B (fast tasks) for all language steps
+- **Tavily:** optional research discovery, implemented; not enabled in the hosted demo
 - **License:** MIT
 
 Compliance checklist:
 
 ```text
-[x] Application runs locally (offline mode verified; Nemotron mode exercised with a mocked Token Factory)
-[ ] Production/demo deployment URL works           ← deploy (docker compose) and add URL
-[x] Nebius Token Factory + Nemotron verified live (nemotron-3-super-120b-a12b + Nemotron-3-Nano-30B-A3B, full loop)
-[ ] Nebius AI Cloud job execution verified live     ← push runner image, EXECUTION_MODE=nebius
+[x] Application runs locally and on Render (https://experimentos-web.onrender.com)
+[x] Nebius Token Factory + NVIDIA Nemotron verified live (full loop, 8 calls, 42 s)
 [x] Experiment actually executes; results are measured, not hard-coded
-[x] MIT license · README · architecture, Nebius, NVIDIA and Tavily usage documented
+[x] Public GitHub repository with MIT license
+[x] README with setup instructions; Nebius, NVIDIA and Tavily usage documented
 [x] Generated code is sandboxed · error states tested · no API keys committed (.env is git-ignored)
-[ ] Public GitHub repository · 3-minute public demo video
+[ ] Nebius AI Cloud job execution verified live (optional path, not used in the demo)
+[ ] 3-minute public demo video
 ```
 
 ## License

@@ -48,3 +48,6 @@ desktop.ini
 
 # deploy staging
 dist/
+
+# local submission drafts
+SUBMISSION.md
