@@ -47,8 +47,9 @@ def create_app(settings: Settings | None = None, llm: LLMClient | None | object 
                             + (" Running in OFFLINE MODE." if settings.allow_offline_fallback else ""))
         else:
             client = llm  # type: ignore[assignment]
-        tv = (TavilyClient(settings.tavily_api_key, settings.tavily_max_results) if settings.tavily_configured
-              else None) if tavily is _UNSET else tavily
+        tv = (TavilyClient(settings.tavily_api_key, settings.tavily_max_results,
+                           cache_dir=settings.llm_cache_dir / "tavily" if settings.llm_cache else None)
+              if settings.tavily_configured else None) if tavily is _UNSET else tavily
         n_questions = len(json.loads(settings.dataset_path.read_text(encoding="utf-8"))["questions"])
 
         bus = EventBus()

@@ -17,6 +17,8 @@ services:
     envVars:
       - key: NEBIUS_API_KEY            # Token Factory key — entered in the dashboard, never in git
         sync: false
+      - key: TAVILY_API_KEY            # Tavily key (research discovery) — entered in the dashboard, never in git
+        sync: false
       - key: NEBIUS_MODEL
         value: nvidia/nemotron-3-super-120b-a12b
       - key: NEBIUS_FAST_MODEL

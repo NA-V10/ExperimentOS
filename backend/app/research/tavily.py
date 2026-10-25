@@ -7,6 +7,9 @@ If Tavily is not configured or fails, the core loop continues without it.
 
 from __future__ import annotations
 
+import hashlib
+import json
+from pathlib import Path
 from typing import Any
 
 import httpx
@@ -21,12 +24,41 @@ TAVILY_URL = "https://api.tavily.com/search"
 
 
 class TavilyClient:
-    def __init__(self, api_key: str, max_results: int = 5, transport: httpx.AsyncBaseTransport | None = None):
+    def __init__(self, api_key: str, max_results: int = 5, transport: httpx.AsyncBaseTransport | None = None,
+                 cache_dir: Path | None = None):
         self.api_key = api_key
         self.max_results = max_results
         self.transport = transport
+        # Reusing results for an identical query saves Tavily credits and keeps the downstream
+        # Nemotron prompts identical, so their responses can be replayed from the LLM cache too.
+        self.cache_dir = cache_dir
+        self.last_cached = False
+
+    def _cache_file(self, query: str) -> Path | None:
+        if not self.cache_dir:
+            return None
+        key = hashlib.sha256(f"{query}|{self.max_results}".encode("utf-8")).hexdigest()
+        return self.cache_dir / f"{key}.json"
 
     async def search(self, query: str) -> list[ResearchSource]:
+        cache = self._cache_file(query)
+        if cache and cache.exists():
+            try:
+                self.last_cached = True
+                return [ResearchSource(**r) for r in json.loads(cache.read_text(encoding="utf-8"))]
+            except (OSError, ValueError, TypeError):
+                pass  # corrupt entry: search again
+        self.last_cached = False
+        sources = await self._search_live(query)
+        if cache and sources:
+            try:
+                cache.parent.mkdir(parents=True, exist_ok=True)
+                cache.write_text(json.dumps([r.model_dump() for r in sources]), encoding="utf-8")
+            except OSError:
+                pass
+        return sources
+
+    async def _search_live(self, query: str) -> list[ResearchSource]:
         async with httpx.AsyncClient(timeout=30.0, transport=self.transport) as client:
             resp = await client.post(
                 TAVILY_URL,
@@ -58,7 +90,9 @@ async def search_research(ctx: AgentContext, tavily: TavilyClient | None, questi
         await ctx.emit("warning", f"Tavily search failed ({type(e).__name__}); continuing without prior evidence.",
                        stage="research")
         return ResearchContext(searched=False, query=query, note=f"Tavily search failed: {type(e).__name__}")
-    rc = ResearchContext(searched=True, query=query, sources=sources)
+    rc = ResearchContext(searched=True, query=query, sources=sources,
+                         note="Tavily results reused from cache (no credits used)." if tavily.last_cached else
+                              "Live Tavily search.")
     if not sources:
         rc.note = "No sources returned."
         return rc

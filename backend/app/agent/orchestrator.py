@@ -239,7 +239,9 @@ class ExperimentOrchestrator:
             self.repo.save_sources(exp_id, state.research_context.sources)
         save()
         await self._stage(exp_id, "research", "completed" if state.research_context.searched else "skipped",
-                          f"{len(state.research_context.sources)} sources reviewed" if state.research_context.searched
+                          f"Tavily: {len(state.research_context.sources)} sources reviewed"
+                          + (" (cached search)" if tavily and tavily.last_cached else "")
+                          if state.research_context.searched
                           else state.research_context.note)
 
         await self._stage(exp_id, "hypothesis", "started", "Generating hypothesis")
